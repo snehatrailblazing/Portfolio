@@ -1,0 +1,406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zines & Editorial Design | Sneha Saxena</title>
+    <!-- Google Fonts: Montserrat for all text (Sans Serif) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Library for Scroll Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Swiper JS for Carousels -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+        /* --- CSS VARIABLES (MAIN THEME) --- */
+        :root {
+            --royal-blue: #002366;
+            --royal-yellow: #FFD700;
+            --bg-light: #f8f9fa;
+            --text-dark: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        /* --- GLOBAL RESET & TYPOGRAPHY --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--royal-blue);
+        }
+
+        p {
+            color: #555;
+            font-size: 1.05rem;
+        }
+
+        section {
+            padding: 100px 10%;
+            position: relative;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        /* --- UTILITY CLASSES --- */
+        .img-placeholder {
+            width: 100%;
+            height: 100%;
+            min-height: 400px;
+            background-color: #e9ecef;
+            border: 2px dashed var(--royal-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--royal-blue);
+            font-weight: 700;
+            text-align: center;
+            padding: 1rem;
+            opacity: 0.9;
+            border-radius: 20px;
+            transition: all 0.4s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        }
+        /* Hover effect for interactive feel */
+        .swiper-slide:hover .img-placeholder {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background-color: var(--royal-yellow);
+            color: var(--royal-blue);
+            font-weight: 800;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 35, 102, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        .logo {
+            font-weight: 900;
+            letter-spacing: 2px;
+            font-size: 1.5rem;
+            color: var(--royal-yellow);
+        }
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.8);
+            margin-left: 2.5rem;
+            position: relative;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--royal-yellow);
+        }
+
+        /* --- HEADER --- */
+        .project-header {
+            padding-top: 200px;
+            padding-bottom: 100px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--royal-blue) 0%, #001030 100%);
+            color: var(--white);
+        }
+        .project-label {
+            color: var(--royal-yellow);
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+        .project-header h1 {
+            font-size: 5rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        /* --- ZINE SECTIONS ALIGNMENT --- */
+        .zine-intro {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center; /* Ensures text is vertically centered with image */
+            margin-bottom: 4rem;
+        }
+        .zine-intro-text h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- SWIPER (HORIZONTAL READER) --- */
+        .swiper {
+            width: 100%;
+            padding-top: 60px;
+            padding-bottom: 80px; /* More space for pagination dots */
+        }
+        .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 450px; /* Slightly wider for better visibility */
+            height: auto;
+            /* Maintaining 3:4 aspect ratio typical for zines */
+            aspect-ratio: 3/4;
+        }
+        /* Specific overrides for different zine styles */
+        .lyric-slide .img-placeholder { border-color: #4A3426; color: #4A3426; background-color: #fffaf4; }
+        .errata-slide .img-placeholder { border-color: #d3d3d3; background: #fff; color: #555; }
+
+        .swiper-pagination-bullet {
+            width: 12px;
+            height: 12px;
+            background: var(--royal-blue);
+            opacity: 0.4;
+        }
+        .swiper-pagination-bullet-active {
+            opacity: 1;
+            background-color: var(--royal-yellow) !important;
+        }
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--royal-blue) !important;
+            background: rgba(255,255,255,0.8);
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+        .swiper-button-next:after, .swiper-button-prev:after {
+            font-size: 1.5rem;
+            font-weight: bold;
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #001540;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            padding: 3rem;
+            margin-top: 6rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+            .zine-intro { grid-template-columns: 1fr; gap: 3rem; text-align: center; }
+            .project-header h1 { font-size: 3.5rem; }
+            section { padding: 80px 5%; }
+            .swiper-slide { width: 80% !important; } /* Wider slides on mobile */
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">SNEHA SAXENA</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#work">All Projects</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="project-header">
+        <span class="project-label" data-aos="fade-down">Project 05</span>
+        <h1 data-aos="zoom-in" data-aos-delay="200">Zines & Editorial</h1>
+        <p data-aos="fade-up" data-aos-delay="400" style="color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto;">
+            Visual storytelling through multi-page layouts, combining typography, imagery, and narrative into cohesive printed experiences.
+        </p>
+    </header>
+
+    <!-- ================= LYRIC CAFÉ ZINE (6 PAGES) ================= -->
+    <section id="lyric-zine" style="background: #fff;">
+        <div class="zine-intro">
+            <div class="zine-intro-text" data-aos="fade-right">
+                <span style="color: #FCA65B; font-weight: 700; letter-spacing: 2px;">ZINE 01</span>
+                <h2 style="color: #4A3426;">Lyric Café Magazine</h2>
+                <p><strong>Design That Sings.</strong></p>
+                <p>This magazine case study explores the visual harmony of Lyric Café. The cover features a rich chocolate and coffee palette with a cozy flat lay, evoking warmth and artisanal quality. The interior spreads delve deeper into the brand's identity.</p>
+                <p style="margin-top: 2rem; font-weight: 700; color: #FCA65B;">Swipe to read the issue <i class="fas fa-arrow-right"></i></p>
+            </div>
+             <!-- Cover visible initially next to intro -->
+            <div class="zine-intro-img" data-aos="fade-left" data-aos-delay="200">
+                 <div class="img-placeholder" style="aspect-ratio: 3/4; border-color: #4A3426; color: #4A3426; box-shadow: 20px 20px 0 #FCA65B;">
+                    <img src="https://cdna.artstation.com/p/assets/images/images/093/608/450/large/sneha-saxena-1.jpg?1763000170"
+					  style="width:99%; height:px; object-fit:cover; border-radius:30px; display:block;">
+                </div>
+            </div>
+        </div>
+
+        <!-- LYRIC CAFE SWIPER -->
+        <div class="swiper lyric-swiper" data-aos="fade-up" data-aos-duration="1000">
+            <div class="swiper-wrapper">
+                <!-- Pages 1-6 -->
+                <div class="swiper-slide lyric-slide"><div class="img-placeholder"> <img src="https://cdnb.artstation.com/p/assets/images/images/093/585/113/large/sneha-saxena-first-page.jpg?1762948983"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+                <div class="swiper-slide lyric-slide"><div class="img-placeholder"> <img src="https://cdna.artstation.com/p/assets/images/images/093/585/060/large/sneha-saxena-page2-lyric-cafe.jpg?1762948851"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+                <div class="swiper-slide lyric-slide"><div class="img-placeholder"> <img src="https://cdna.artstation.com/p/assets/images/images/093/585/064/large/sneha-saxena-page3-lyric-cafe.jpg?1762948866"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+                <div class="swiper-slide lyric-slide"><div class="img-placeholder"> <img src="https://cdnb.artstation.com/p/assets/images/images/093/585/071/large/sneha-saxena-page4-lyric-cafe.jpg?1762948879"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+                <div class="swiper-slide lyric-slide"><div class="img-placeholder"> <img src="https://cdnb.artstation.com/p/assets/images/images/093/585/077/small/sneha-saxena-page5-lyric-cafe.jpg?1762948894"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+                <div class="swiper-slide lyric-slide"><div class="img-placeholder"> <img src="https://cdnb.artstation.com/p/assets/images/images/093/585/113/large/sneha-saxena-first-page.jpg?1762948983"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <!-- DIVIDER -->
+    <div style="height: 120px; background: linear-gradient(to bottom, #fff, #f8f9fa);"></div>
+
+    <!-- ================= ERRATA ART JOURNAL (12 PAGES) ================= -->
+    <section id="errata-zine" style="background: #f8f9fa;">
+        <div class="zine-intro">
+             <!-- Image first on left for variety in layout flow -->
+             <div class="zine-intro-img" data-aos="fade-right">
+                <div class="img-placeholder" style="aspect-ratio: 3/4; border: none; background: #e0dcd8; color: #333; box-shadow: -20px 20px 0 var(--royal-blue);">
+                    <img src="https://cdnb.artstation.com/p/assets/images/images/093/608/451/large/sneha-saxena-2.jpg?1763000174"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;">
+                </div>
+            </div>
+            <div class="zine-intro-text" data-aos="fade-left" data-aos-delay="200">
+                <span style="color: var(--royal-yellow); background: var(--royal-blue); padding: 4px 12px; font-weight: 700; letter-spacing: 2px; font-size: 0.9rem;">ZINE 02</span>
+                <h2 style="margin-top: 1.5rem;">Errata Art Journal</h2>
+                <p><strong>Correcting the Uncorrected Masterpiece.</strong></p>
+                <p>This art journal concept invites exploration of art history and hidden narratives. Showcasing a classic ballerina sketch reminiscent of Degas on the cover, it is complemented by soft, natural styling with linen and flowers for an elegant, timeless aesthetic.</p>
+                <p style="margin-top: 2rem; font-weight: 700; color: var(--royal-blue);">Swipe to explore <i class="fas fa-arrow-right"></i></p>
+            </div>
+        </div>
+
+        <!-- ERRATA SWIPER -->
+        <div class="swiper errata-swiper" data-aos="fade-up" data-aos-duration="1000">
+             <div class="swiper-wrapper">
+                <!-- Pages 1-12 -->
+                <div class="swiper-slide errata-slide"><div class="img-placeholder"> <img src="https://cdnb.artstation.com/p/assets/images/images/093/584/837/large/sneha-saxena-page1-errata.jpg?1762948524"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+                <div class="swiper-slide errata-slide"><div class="img-placeholder"><img src="https://cdnb.artstation.com/p/assets/images/images/093/584/839/large/sneha-saxena-page2-errata.jpg?1762948539"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+                <div class="swiper-slide errata-slide"><div class="img-placeholder"><img src="https://cdna.artstation.com/p/assets/images/images/093/584/842/large/sneha-saxena-page3-errata.jpg?1762948553"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+                <div class="swiper-slide errata-slide"><div class="img-placeholder"><img src="https://cdna.artstation.com/p/assets/images/images/093/584/850/large/sneha-saxena-page4-errata.jpg?1762948567"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+                <div class="swiper-slide errata-slide"><div class="img-placeholder"><img src="https://cdnb.artstation.com/p/assets/images/images/093/584/867/large/sneha-saxena-page5-errata.jpg?1762948578"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+                <div class="swiper-slide errata-slide"><div class="img-placeholder"><img src="https://cdna.artstation.com/p/assets/images/images/093/584/874/large/sneha-saxena-page6-errata.jpg?1762948602"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+                <div class="swiper-slide errata-slide"><div class="img-placeholder"><img src="https://cdna.artstation.com/p/assets/images/images/093/584/890/large/sneha-saxena-page7-errata.jpg?1762948620"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+                <div class="swiper-slide errata-slide"><div class="img-placeholder"><img src="https://cdnb.artstation.com/p/assets/images/images/093/585/033/large/sneha-saxena-page8-errata.jpg?1762948794"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+                <div class="swiper-slide errata-slide"><div class="img-placeholder"><img src="https://cdnb.artstation.com/p/assets/images/images/093/585/011/large/sneha-saxena-page9-errata.jpg?1762948754"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+                <div class="swiper-slide errata-slide"><div class="img-placeholder"><img src="https://cdna.artstation.com/p/assets/images/images/093/584/954/large/sneha-saxena-page10-errata.jpg?1762948686"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+                <div class="swiper-slide errata-slide"><div class="img-placeholder"><img src="https://cdnb.artstation.com/p/assets/images/images/093/584/965/large/sneha-saxena-page11-errata.jpg?1762948703"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+                <div class="swiper-slide errata-slide"><div class="img-placeholder"><img src="https://cdnb.artstation.com/p/assets/images/images/093/584/837/large/sneha-saxena-page1-errata.jpg?1762948524"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div></div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <!-- NEXT PROJECT NAV -->
+    <section style="text-align: center; padding: 100px 0; background: var(--royal-blue);">
+        <h2 style="color: var(--white); margin-bottom: 2rem;" data-aos="zoom-in">Ready to see more?</h2>
+        <a href="index.html#work" class="btn" data-aos="fade-up" data-aos-delay="200">Back to All Projects</a>
+    </section>
+
+    
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Initialize AOS with slightly longer duration for smoother feel
+        AOS.init({
+            duration: 1000,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 100
+        });
+
+        // Swiper Config for 3D Coverflow Effect
+        const swiperConfig = {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            initialSlide: 0, // Start at the cover
+            coverflowEffect: {
+                rotate: 30,      // Rotation angle of the non-centered slides
+                stretch: 0,      // Space between slides (0 is default)
+                depth: 200,      // Depth offset (higher = smaller non-centered slides)
+                modifier: 1,     // Multiplier for effects
+                slideShadows: true, // Enable shadows for depth
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+                dynamicBullets: true, // Nice effect for many pages
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            // Enable keyboard control for accessibility
+            keyboard: {
+                enabled: true,
+            },
+        };
+
+        // Initialize both Swipers with the same enhanced config
+        new Swiper('.lyric-swiper', swiperConfig);
+        new Swiper('.errata-swiper', swiperConfig);
+    </script>
+</body>
+</html>

@@ -1,0 +1,391 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Poster Design | Sneha Saxena</title>
+    <!-- Google Fonts: Montserrat for all text (Sans Serif) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Library for Scroll Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Swiper JS for Carousel -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+    <style>
+        /* --- CSS VARIABLES (MAIN THEME) --- */
+        :root {
+            --royal-blue: #002366;
+            --royal-yellow: #FFD700;
+            --bg-light: #f8f9fa;
+            --text-dark: #1a1a1a;
+            --white: #ffffff;
+        }
+
+        /* --- GLOBAL RESET & TYPOGRAPHY --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4 {
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            color: var(--royal-blue);
+        }
+
+        p {
+            color: #555;
+            font-size: 1.05rem;
+        }
+
+        section {
+            padding: 100px 10%;
+            position: relative;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        /* --- UTILITY CLASSES --- */
+        .img-placeholder {
+            width: 100%;
+            height: 100%;
+            /* Standard poster ratio ~3:4 */
+            aspect-ratio: 3/4; 
+            background-color: #e9ecef;
+            border: 2px dashed var(--royal-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--royal-blue);
+            font-weight: 700;
+            text-align: center;
+            padding: 1rem;
+            opacity: 0.9;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        .swiper-slide-active .img-placeholder {
+            opacity: 1;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.3); /* Highlight active poster */
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background-color: var(--royal-yellow);
+            color: var(--royal-blue);
+            font-weight: 800;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+        }
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 215, 0, 0.4);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 35, 102, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        .logo {
+            font-weight: 900;
+            letter-spacing: 2px;
+            font-size: 1.5rem;
+            color: var(--royal-yellow);
+        }
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.8);
+            margin-left: 2.5rem;
+            position: relative;
+        }
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--royal-yellow);
+        }
+
+        /* --- HEADER --- */
+        .project-header {
+            padding-top: 200px;
+            padding-bottom: 100px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--royal-blue) 0%, #001030 100%);
+            color: var(--white);
+        }
+        .project-label {
+            color: var(--royal-yellow);
+            font-weight: 700;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 1.5rem;
+        }
+        .project-header h1 {
+            font-size: 5rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+            line-height: 1.1;
+        }
+
+        /* --- POSTER SECTIONS --- */
+        .poster-intro {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        .poster-intro h2 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        /* --- SWIPER CAROUSEL STYLES --- */
+        .swiper {
+            width: 100%;
+            padding-top: 50px;
+            padding-bottom: 50px;
+        }
+        .swiper-slide {
+            background-position: center;
+            background-size: cover;
+            width: 320px; /* Fixed width for portrait posters */
+            height: auto;
+        }
+        .swiper-pagination-bullet-active {
+            background-color: var(--royal-blue) !important;
+        }
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--royal-yellow) !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #001540;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            padding: 3rem;
+            margin-top: 6rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+            .project-header h1 { font-size: 3.5rem; }
+            section { padding: 80px 5%; }
+            .swiper-slide { width: 280px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">SNEHA SAXENA</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#work">All Projects</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <header class="project-header">
+        <span class="project-label" data-aos="fade-down">Project 06</span>
+        <h1 data-aos="zoom-in" data-aos-delay="200">Poster Design</h1>
+        <p data-aos="fade-up" data-aos-delay="400" style="color: rgba(255,255,255,0.8); max-width: 600px; margin: 0 auto;">
+            Visual communication that captures attention and conveys messages through bold imagery, typography, and color.
+        </p>
+    </header>
+
+    <!-- ================= POSTER SET 1 (7 POSTERS) ================= -->
+    <section id="set-1" style="background: #fff;">
+        <div class="poster-intro" data-aos="fade-up">
+            <span style="color: #FCA65B; font-weight: 700; letter-spacing: 2px;">SET 01</span>
+            <h2 style="color: var(--royal-blue);">Campaign & Event Posters</h2>
+            <p style="max-width: 700px; margin: 0 auto;">
+                A collection featuring marathon, festival, and social awareness campaign designs.
+            </p>
+        </div>
+
+        <!-- Swiper 1 -->
+        <div class="swiper swiper1" data-aos="zoom-in-up" data-aos-delay="200">
+            <div class="swiper-wrapper">
+                <!-- Poster 1 -->
+                <div class="swiper-slide">
+                    <div class="img-placeholder" style="border-color: var(--royal-blue);"><img src="https://cdnb.artstation.com/p/assets/images/images/093/585/319/large/sneha-saxena-poster.jpg?1762949331"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                </div>
+                <!-- Poster 2 -->
+                <div class="swiper-slide">
+                    <div class="img-placeholder" style="border-color: var(--royal-blue);"><img src="https://cdnb.artstation.com/p/assets/images/images/093/585/327/large/sneha-saxena-poster1.jpg?1762949340"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                </div>
+                <!-- Poster 3 -->
+                <div class="swiper-slide">
+                    <div class="img-placeholder" style="border-color: var(--royal-yellow);"><img src="https://cdna.artstation.com/p/assets/images/images/093/585/330/large/sneha-saxena-poster2.jpg?1762949348"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                </div>
+                <!-- Poster 4 -->
+                <div class="swiper-slide">
+                    <div class="img-placeholder" style="border-color: var(--royal-yellow);"><img src="https://cdnb.artstation.com/p/assets/images/images/093/585/333/large/sneha-saxena-poster3.jpg?1762949353"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                </div>
+                <!-- Poster 5 -->
+                <div class="swiper-slide">
+                    <div class="img-placeholder" style="border-color: var(--royal-blue);"><img src="https://cdnb.artstation.com/p/assets/images/images/093/585/337/large/sneha-saxena-poster4.jpg?1762949358"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                </div>
+                 <!-- Poster 6 -->
+                 <div class="swiper-slide">
+                    <div class="img-placeholder" style="border-color: var(--royal-yellow);"><img src="https://cdnb.artstation.com/p/assets/images/images/093/585/339/large/sneha-saxena-poster5.jpg?1762949363"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                </div>
+                 <!-- Poster 7 -->
+                 <div class="swiper-slide">
+                    <div class="img-placeholder" style="border-color: var(--royal-blue);"><img src="https://cdnb.artstation.com/p/assets/images/images/093/585/343/large/sneha-saxena-poster6.jpg?1762949368"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <!-- DIVIDER -->
+    <div style="height: 100px; background: linear-gradient(to bottom, #fff, #f8f9fa);"></div>
+
+    <!-- ================= POSTER SET 2 (7 POSTERS) ================= -->
+    <section id="set-2" style="background: #f8f9fa;">
+        <div class="poster-intro" data-aos="fade-up">
+            <span style="color: var(--royal-yellow); background: var(--royal-blue); padding: 2px 10px; font-weight: 700; letter-spacing: 2px;">SET 02</span>
+            <h2 style="margin-top: 1rem;">Self-Initiated & Creative</h2>
+            <p style="max-width: 700px; margin: 0 auto;">
+                Experimental designs exploring typography, color, and composition for various fictional brands and concepts.
+            </p>
+        </div>
+
+        <!-- Swiper 2 -->
+        <div class="swiper swiper2" data-aos="zoom-in-up" data-aos-delay="200">
+            <div class="swiper-wrapper">
+                 <!-- Poster 8 -->
+                <div class="swiper-slide">
+                    <div class="img-placeholder" style="border: none; background: #FF8C00; color: #fff;"><img src="https://cdnb.artstation.com/p/assets/images/images/093/585/347/large/sneha-saxena-poster7.jpg?1762949374"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                </div>
+                <!-- Poster 9 -->
+                <div class="swiper-slide">
+                    <div class="img-placeholder" style="border: none; background: #d32f2f; color: #fff;"><img src="https://cdnb.artstation.com/p/assets/images/images/093/585/359/large/sneha-saxena-poster11.jpg?1762949399"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                </div>
+                <!-- Poster 10 -->
+                <div class="swiper-slide">
+                    <div class="img-placeholder" style="border: none; background: #333; color: #fff;"><img src="https://cdnb.artstation.com/p/assets/images/images/093/585/349/large/sneha-saxena-poster8.jpg?1762949380"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                </div>
+                <!-- Poster 11 -->
+                <div class="swiper-slide">
+                    <div class="img-placeholder" style="border: none; background: #4A148C; color: #fff;"><img src="https://cdna.artstation.com/p/assets/images/images/093/585/354/large/sneha-saxena-poster9.jpg?1762949384"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                </div>
+                <!-- Poster 12 -->
+                <div class="swiper-slide">
+                    <div class="img-placeholder" style="border: none; background: #00695C; color: #fff;"><img src="https://cdna.artstation.com/p/assets/images/images/093/585/358/large/sneha-saxena-poster10.jpg?1762949393"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                </div>
+                 <!-- Poster 13 -->
+                 <div class="swiper-slide">
+                    <div class="img-placeholder" style="border: none; background: #C2185B; color: #fff;"><img src="https://cdna.artstation.com/p/assets/images/images/093/585/364/large/sneha-saxena-poster13.jpg?1762949409"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                </div>
+                 <!-- Poster 14 -->
+                 <div class="swiper-slide">
+                    <div class="img-placeholder" style="border: none; background: #1565C0; color: #fff;"><img src="https://cdnb.artstation.com/p/assets/images/images/093/585/361/large/sneha-saxena-poster12.jpg?1762949403"
+					  style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                </div>
+            </div>
+            <div class="swiper-pagination"></div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+    </section>
+
+    <!-- NEXT PROJECT NAV -->
+    <section style="text-align: center; padding: 80px 0; background: var(--royal-blue);">
+        <h2 style="color: var(--white); margin-bottom: 2rem;">Explore More Work</h2>
+        <a href="index.html#work" class="btn">View All Projects</a>
+    </section>
+
+    
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 120
+        });
+
+        // Swiper Config for 3D Coverflow Effect
+        const swiperConfig = {
+            effect: 'coverflow',
+            grabCursor: true,
+            centeredSlides: true,
+            slidesPerView: 'auto',
+            coverflowEffect: {
+                rotate: 50,
+                stretch: 0,
+                depth: 100,
+                modifier: 1,
+                slideShadows: true,
+            },
+            pagination: {
+                el: '.swiper-pagination',
+                clickable: true,
+            },
+            navigation: {
+                nextEl: '.swiper-button-next',
+                prevEl: '.swiper-button-prev',
+            },
+            // Initial slide to start in the middle for better visual balance if desired, otherwise 0
+            initialSlide: 3, 
+        };
+
+        // Initialize both swipers with unique class names
+        new Swiper('.swiper1', swiperConfig);
+        new Swiper('.swiper2', swiperConfig);
+    </script>
+</body>
+</html>

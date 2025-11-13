@@ -1,0 +1,468 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Social Media Projects | Sneha Saxena</title>
+    <!-- Google Fonts: Montserrat for all text (Sans Serif) -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+    <!-- Font Awesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- AOS Library for Scroll Animations -->
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <!-- Swiper JS for Carousel -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+
+
+    <style>
+        /* --- CSS VARIABLES (ROYAL BLUE & YELLOW THEME) --- */
+        :root {
+            --royal-blue: #002366;    /* Deep, rich blue */
+            --royal-yellow: #FFD700;  /* Gold/Yellow accent */
+            --bg-light: #f8f9fa;      /* Very light gray background */
+            --text-dark: #1a1a1a;     /* Nearly black text */
+            --text-light: #f8f9fa;    /* Light text for dark backgrounds */
+            --white: #ffffff;
+        }
+
+        /* --- GLOBAL RESET & TYPOGRAPHY --- */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            scroll-behavior: smooth;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-weight: 700;
+            letter-spacing: -0.5px;
+            color: var(--royal-blue);
+        }
+
+        section {
+            padding: 100px 10%;
+            position: relative;
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.3s ease;
+        }
+
+        /* --- UTILITY CLASSES --- */
+        .img-placeholder {
+            width: 100%;
+            height: 100%;
+            min-height: 300px; /* Reduced min-height for better grid fit */
+            background-color: #e9ecef;
+            border: 2px dashed var(--royal-blue);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: var(--royal-blue);
+            font-weight: 600;
+            text-align: center;
+            padding: 1.5rem;
+            opacity: 0.8;
+            transition: all 0.3s ease;
+            border-radius: 15px;
+            font-size: 0.9rem;
+        }
+        .img-placeholder:hover {
+            opacity: 1;
+            box-shadow: 0 10px 30px rgba(0, 35, 102, 0.15);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            background-color: var(--royal-yellow);
+            color: var(--royal-blue);
+            font-weight: 700;
+            border-radius: 50px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 4px 15px rgba(255, 215, 0, 0.3);
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(255, 215, 0, 0.5);
+        }
+
+        /* --- NAVIGATION --- */
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 5%;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            background: rgba(0, 35, 102, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(255, 215, 0, 0.2);
+        }
+        .logo {
+            font-weight: 900;
+            letter-spacing: 2px;
+            font-size: 1.5rem;
+            color: var(--royal-yellow);
+        }
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            margin-left: 2rem;
+            position: relative;
+        }
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 3px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--royal-yellow);
+            transition: width 0.3s ease;
+        }
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* --- PROJECT HEADER --- */
+        .project-header {
+            padding-top: 180px;
+            text-align: center;
+            background: linear-gradient(135deg, var(--royal-blue) 0%, #001540 100%);
+            color: var(--white);
+            padding-bottom: 80px;
+        }
+        .project-label {
+            color: var(--royal-yellow);
+            font-weight: 700;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            display: block;
+            margin-bottom: 1rem;
+        }
+        .project-header h1 {
+            font-size: 4rem;
+            color: var(--white);
+            margin-bottom: 1.5rem;
+        }
+        .project-header p {
+            max-width: 600px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            opacity: 0.9;
+        }
+
+        /* --- GALLERY GRID --- */
+        .gallery-section {
+            background-color: var(--white);
+        }
+        .gallery-section.alt-bg {
+             background-color: var(--bg-light);
+        }
+        .gallery-title {
+            text-align: center;
+            margin-bottom: 3rem;
+            font-size: 2.5rem;
+        }
+        .gallery-grid {
+            display: grid;
+            gap: 3rem;
+        }
+        /* Grid variations */
+        .grid-2 { grid-template-columns: repeat(2, 1fr); }
+        .grid-3 { grid-template-columns: repeat(3, 1fr); }
+        .grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+        .gallery-item {
+            position: relative;
+        }
+        .gallery-caption {
+            margin-top: 1rem;
+            font-weight: 600;
+            color: var(--royal-blue);
+            text-align: center;
+        }
+
+        /* --- INSTAGRAM FEED CAROUSEL --- */
+        .insta-carousel-section {
+            background: var(--royal-blue); /* Dark background to make phone pop */
+            overflow: hidden;
+        }
+        .insta-carousel-section .gallery-title {
+            color: var(--white);
+        }
+        .insta-feed-container {
+            max-width: 400px;
+            margin: 0 auto;
+            background: #fff;
+            border-radius: 35px;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+            overflow: hidden;
+            border: 12px solid #111;
+            position: relative;
+        }
+        .insta-header {
+            padding: 1rem;
+            border-bottom: 1px solid #eee;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-weight: 700;
+            background: #fff;
+            position: relative;
+            z-index: 2;
+        }
+        .swiper {
+            width: 100%;
+            height: 600px;
+        }
+        .swiper-slide {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #fff;
+        }
+        .swiper-pagination-bullet-active {
+            background-color: var(--royal-blue) !important;
+        }
+        .swiper-button-next, .swiper-button-prev {
+            color: var(--royal-yellow) !important;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.3);
+        }
+
+        /* --- FOOTER --- */
+        footer {
+            background: #001540;
+            color: rgba(255, 255, 255, 0.6);
+            text-align: center;
+            padding: 2rem;
+            margin-top: 4rem;
+        }
+
+        /* --- RESPONSIVE --- */
+        @media (max-width: 992px) {
+             .grid-4 { grid-template-columns: repeat(2, 1fr); }
+        }
+        @media (max-width: 768px) {
+            .project-header h1 { font-size: 3rem; }
+            .grid-2, .grid-3, .grid-4 { grid-template-columns: 1fr; }
+            section { padding: 80px 5%; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="logo">SNEHA SAXENA</div>
+        <div class="nav-links">
+            <a href="index.html">Home</a>
+            <a href="index.html#work">All Projects</a>
+            <a href="index.html#contact">Contact</a>
+        </div>
+    </nav>
+
+    <!-- PROJECT HEADER -->
+    <header class="project-header">
+        <span class="project-label" data-aos="fade-down">Project 01</span>
+        <h1 data-aos="zoom-in" data-aos-delay="200">Social Media Design</h1>
+        <p data-aos="fade-up" data-aos-delay="400">
+            Engaging visuals for Instagram feeds, stories, and static posts designed to boost brand presence and audience interaction.
+        </p>
+    </header>
+
+    <!-- SECTION 1: STATIC POSTS (1080 x 1350) - 4 ITEMS -->
+    <section class="gallery-section">
+        <h2 class="gallery-title" data-aos="fade-up">Static Posts (1080 x 1350)</h2>
+        <div class="gallery-grid grid-2">
+            <!-- Item 1 -->
+            <div class="gallery-item" data-aos="fade-up">
+                <!-- ### IMPORTANT: Insert 1080x1350 Image 1 ### -->
+                <div class="img-placeholder" style="aspect-ratio: 4/5;">
+<img src="https://cdnb.artstation.com/p/assets/images/images/093/579/473/large/sneha-saxena-1080x1350-post-1-x-media.jpg?1762938359"
+ style="width:102%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+            </div>
+            <!-- Item 2 -->
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                 <!-- ### IMPORTANT: Insert 1080x1350 Image 2 ### -->
+                <div class="img-placeholder" style="aspect-ratio: 4/5;">
+<img src="https://cdna.artstation.com/p/assets/images/images/093/579/476/large/sneha-saxena-1080x1350-post-3-x-media.jpg?1762938367"
+ style="width:102%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+            </div>
+             <!-- Item 3 -->
+             <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                <!-- ### IMPORTANT: Insert 1080x1350 Image 3 ### -->
+               <div class="img-placeholder" style="aspect-ratio: 4/5;"><br>
+<img src="https://cdna.artstation.com/p/assets/images/images/093/579/482/large/sneha-saxena-1080x1350-post-4-x-media.jpg?1762938376"
+ style="width:102%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+           </div>
+            <!-- Item 4 -->
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                <!-- ### IMPORTANT: Insert 1080x1350 Image 4 ### -->
+               <div class="img-placeholder" style="aspect-ratio: 4/5;"><br>
+<img src="https://cdna.artstation.com/p/assets/images/images/093/579/488/large/sneha-saxena-1080x1350-post2-x-media.jpg?1762938387"
+ style="width:102%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+           </div>
+        </div>
+    </section>
+
+    <!-- SECTION 2: INSTAGRAM FEED CURATION CAROUSEL (UNCHANGED) -->
+    <section class="insta-carousel-section">
+        <h2 class="gallery-title" data-aos="fade-up">Instagram Feed Curation</h2>
+        <div class="insta-feed-container" data-aos="zoom-in-up">
+            <div class="insta-header">
+                <i class="fas fa-chevron-left"></i>
+                <span>draw_withsneha</span>
+                <i class="fas fa-ellipsis-h"></i>
+            </div>
+            <!-- Swiper Carousel -->
+            <div class="swiper mySwiper">
+                <div class="swiper-wrapper">
+                    <div class="swiper-slide">
+                        <div class="img-placeholder" style="width: 100%; height: 100%; border: none; border-radius: 0;">
+							<img src="https://cdna.artstation.com/p/assets/images/images/093/579/740/large/sneha-saxena-slide1-x-media.jpg?1762938966"
+ style="width:110%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-placeholder" style="width: 100%; height: 100%; border: none; border-radius: 0;">
+<img src="https://cdnb.artstation.com/p/assets/images/images/093/579/743/large/sneha-saxena-slide2-x-media.jpg?1762938970"
+ style="width:110%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-placeholder" style="width: 100%; height: 100%; border: none; border-radius: 0;"><img src="https://cdnb.artstation.com/p/assets/images/images/093/579/745/large/sneha-saxena-slide3-x-media.jpg?1762938974"
+ style="width:110%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-placeholder" style="width: 100%; height: 100%; border: none; border-radius: 0;"><img src="https://cdna.artstation.com/p/assets/images/images/093/579/748/large/sneha-saxena-slide4-x-media.jpg?1762938979"
+ style="width:110%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                    </div>
+                    <div class="swiper-slide">
+                        <div class="img-placeholder" style="width: 100%; height: 100%; border: none; border-radius: 0;"><img src="https://cdna.artstation.com/p/assets/images/images/093/579/748/large/sneha-saxena-slide4-x-media.jpg?1762938979"
+ style="width:110%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+                    </div>
+                </div>
+                <div class="swiper-button-next"></div>
+                <div class="swiper-button-prev"></div>
+                <div class="swiper-pagination"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 3: SQUARE POSTS (1080 x 1080) - 4 ITEMS -->
+    <section class="gallery-section alt-bg">
+        <h2 class="gallery-title" data-aos="fade-up">Square Posts (1080 x 1080)</h2>
+        <div class="gallery-grid grid-4">
+            <div class="gallery-item" data-aos="flip-left" data-aos-delay="0">
+                 <!-- ### IMPORTANT: Insert 1080x1080 Image 1 ### -->
+                <div class="img-placeholder" style="aspect-ratio: 1/1;"><img src="https://cdnb.artstation.com/p/assets/images/images/093/579/613/large/sneha-saxena-square-post1-x-media.jpg?1762938664"
+ style="width:110%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+            </div>
+            <div class="gallery-item" data-aos="flip-left" data-aos-delay="100">
+                 <!-- ### IMPORTANT: Insert 1080x1080 Image 2 ### -->
+                <div class="img-placeholder" style="aspect-ratio: 1/1;"><img src="https://cdnb.artstation.com/p/assets/images/images/093/579/617/large/sneha-saxena-square-post2-x-media.jpg?1762938671"
+ style="width:110%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+            </div>
+            <div class="gallery-item" data-aos="flip-left" data-aos-delay="200">
+                 <!-- ### IMPORTANT: Insert 1080x1080 Image 3 ### -->
+                <div class="img-placeholder" style="aspect-ratio: 1/1;"><img src="https://cdna.artstation.com/p/assets/images/images/093/579/620/large/sneha-saxena-square-post3-x-media.jpg?1762938678"
+ style="width:110%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+            </div>
+            <div class="gallery-item" data-aos="flip-left" data-aos-delay="300">
+                 <!-- ### IMPORTANT: Insert 1080x1080 Image 4 ### -->
+                <div class="img-placeholder" style="aspect-ratio: 1/1;"><img src="https://cdna.artstation.com/p/assets/images/images/093/579/626/large/sneha-saxena-square-post4-x-media.jpg?1762938685"
+ style="width:110%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 4: STORY POSTS (1080 x 1920) - 4 ITEMS -->
+    <section class="gallery-section">
+        <h2 class="gallery-title" data-aos="fade-up">Stories (1080 x 1920)</h2>
+        <div class="gallery-grid grid-4">
+             <div class="gallery-item" data-aos="fade-up" data-aos-delay="0">
+                 <!-- ### IMPORTANT: Insert 1080x1920 Image 1 ### -->
+                <div class="img-placeholder" style="aspect-ratio: 9/16;"><img src="https://cdnb.artstation.com/p/assets/images/images/093/579/827/large/sneha-saxena-story1-x-media.jpg?1762939119"
+ style="width:110%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="100">
+                 <!-- ### IMPORTANT: Insert 1080x1920 Image 2 ### -->
+                <div class="img-placeholder" style="aspect-ratio: 9/16;"><img src="https://cdna.artstation.com/p/assets/images/images/093/579/838/large/sneha-saxena-story2-x-media.jpg?1762939132"
+ style="width:110%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="200">
+                 <!-- ### IMPORTANT: Insert 1080x1920 Image 3 ### -->
+                <div class="img-placeholder" style="aspect-ratio: 9/16;"><img src="https://cdnb.artstation.com/p/assets/images/images/093/579/843/large/sneha-saxena-story3-x-media.jpg?1762939141"
+ style="width:110%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+            </div>
+            <div class="gallery-item" data-aos="fade-up" data-aos-delay="300">
+                 <!-- ### IMPORTANT: Insert 1080x1920 Image 4 ### -->
+                <div class="img-placeholder" style="aspect-ratio: 9/16;"><img src="https://cdna.artstation.com/p/assets/images/images/093/579/850/large/sneha-saxena-story4-x-media.jpg?1762939150
+"
+ style="width:110%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SECTION 5: LANDSCAPE POST (1920 x 1080) - 1 ITEM -->
+    <section class="gallery-section alt-bg">
+        <h2 class="gallery-title" data-aos="fade-up">Landscape Creative (1920 x 1080)</h2>
+        <div data-aos="zoom-in">
+             <!-- ### IMPORTANT: Insert 1920x1080 Image ### -->
+            <div class="img-placeholder" style="aspect-ratio: 16/9; max-width: 1000px; margin: 0 auto;">
+                <img src="https://cdna.artstation.com/p/assets/images/images/093/579/982/large/sneha-saxena-untitled-design-8.jpg?1762939361"
+					 style="width:100%; height:px; object-fit:cover; border-radius:30px; display:block;"></div>
+            </div>
+    </section>
+
+    <!-- NEXT PROJECT NAV -->
+    <section style="text-align: center; padding: 50px 0;">
+        <a href="index.html#work" class="btn">Back to All Projects</a>
+    </section>
+
+
+    <!-- SCRIPTS -->
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+        // Initialize AOS
+        AOS.init({
+            duration: 800,
+            easing: 'ease-out-cubic',
+            once: true,
+            offset: 120
+        });
+
+        // Initialize Swiper
+        var swiper = new Swiper(".mySwiper", {
+            navigation: {
+                nextEl: ".swiper-button-next",
+                prevEl: ".swiper-button-prev",
+            },
+            pagination: {
+                el: ".swiper-pagination",
+                clickable: true,
+            },
+            loop: true, 
+        });
+    </script>
+</body>
+</html>
